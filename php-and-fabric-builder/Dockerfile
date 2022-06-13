@@ -1,7 +1,8 @@
 FROM php:7.4-cli
 LABEL Author="Luis Lopes <git@luislopes.org>" \
-      Description="Container with PHP 7.4"
+      Description="Container with PHP 7.4 and NPM"
 
+# install all packages in a go
 RUN apt-get update \
   && apt-get install -y \
     libfreetype6-dev \
@@ -10,7 +11,15 @@ RUN apt-get update \
     iproute2 \
     libzip-dev \
     libxslt1-dev \
-    build-essential
+    build-essential \
+    nodejs \
+    npm \
+    git \
+    openssh-client \
+    python3-pip \
+    wget \
+    unzip \
+  && rm -rf /var/lib/apt/lists/*
 
 RUN docker-php-ext-install \
   bcmath \
@@ -24,15 +33,15 @@ RUN docker-php-ext-install \
   soap \
   opcache
 
-# install composer and "dependencies"
-RUN apt-get install -y wget unzip
+# install composer
 COPY install-composer.sh /root/install-composer.sh
 RUN sh /root/install-composer.sh
 
-# oh, we need git and the ssh client too...
-RUN apt-get install -y git openssh-client \
-    && apt install -y python3-pip \ 
-    && pip install fabric \
+# update NPM
+# RUN npm update -g
+
+# fabric & final ssh setup
+RUN pip install fabric \
     # Prepare SSH handling
     && mkdir /root/.ssh \
     && chmod 0600 /root/.ssh \
