@@ -3,7 +3,7 @@ LABEL Author="Luis Lopes <git@luislopes.org>" \
       Description="Container with PHP 8.1, fabric and NPM"
 
 # install all packages in a go
-RUN apt-get update \
+RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash \
   && apt-get install -y \
     libfreetype6-dev \
     libjpeg62-turbo-dev \
@@ -13,7 +13,6 @@ RUN apt-get update \
     libxslt1-dev \
     build-essential \
     nodejs \
-    npm \
     git \
     openssh-client \
     python3-pip \
@@ -36,9 +35,6 @@ RUN docker-php-ext-install \
 # install composer
 COPY install-composer.sh /root/install-composer.sh
 RUN sh /root/install-composer.sh
-
-# update NPM
-# RUN npm update -g
 
 # fabric & final ssh setup
 RUN pip install fabric \
