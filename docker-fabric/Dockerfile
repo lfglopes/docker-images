@@ -1,8 +1,8 @@
 FROM docker:23.0
 
 # I want to install python3 and pip3
-RUN apk add --no-cache python3 py3-pip
-RUN pip install fabric \
+RUN apk add --no-cache python3 py3-pip bash
+RUN pip install fabric decorator \
     # Prepare SSH handling
     && mkdir /root/.ssh \
     && chmod 0600 /root/.ssh \
