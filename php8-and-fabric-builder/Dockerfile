@@ -3,7 +3,7 @@ LABEL Author="Luis Lopes <git@luislopes.org>" \
       Description="Container with PHP 8.1, fabric and NPM"
 
 # install all packages in a go
-RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash \
+RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash \
   && apt-get install -y \
     libfreetype6-dev \
     libjpeg62-turbo-dev \
@@ -12,6 +12,7 @@ RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash \
     libzip-dev \
     libxslt1-dev \
     build-essential \
+    gettext \
     nodejs \
     git \
     openssh-client \
