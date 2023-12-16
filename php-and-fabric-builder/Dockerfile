@@ -19,6 +19,8 @@ RUN apt-get update \
     python3-pip \
     wget \
     unzip \
+    # mysqldump command
+    mariadb-client-10.5 \    
   && rm -rf /var/lib/apt/lists/*
 
 RUN docker-php-ext-install \
