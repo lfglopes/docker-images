@@ -2,5 +2,5 @@
 
 set -e
 
-docker build -t lfglopes/php-and-fabric-builder:latest .
-docker push lfglopes/php-and-fabric-builder:latest
+docker build -t lfglopes/php8-and-fabric-builder:latest .
+docker push lfglopes/php8-and-fabric-builder:latest

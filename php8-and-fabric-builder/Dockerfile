@@ -1,9 +1,9 @@
-FROM php:8.1.9-cli
+FROM php:8.1.28-cli
 LABEL Author="Luis Lopes <git@luislopes.org>" \
       Description="Container with PHP 8.1, fabric and NPM"
 
 # install all packages in a go
-RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash \
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash \
   && apt-get install -y \
     libfreetype6-dev \
     libjpeg62-turbo-dev \
@@ -38,7 +38,7 @@ COPY install-composer.sh /root/install-composer.sh
 RUN sh /root/install-composer.sh
 
 # fabric & final ssh setup
-RUN pip install fabric \
+RUN pip install fabric --break-system-packages \
     # Prepare SSH handling
     && mkdir /root/.ssh \
     && chmod 0600 /root/.ssh \
