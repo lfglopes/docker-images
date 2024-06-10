@@ -1,4 +1,5 @@
-FROM php:8.1.28-cli
+ARG PHP_VERSION=8.1
+FROM php:${PHP_VERSION}-cli
 LABEL Author="Luis Lopes <git@luislopes.org>" \
       Description="Container with PHP 8.1, fabric and NPM"
 
@@ -19,6 +20,8 @@ RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash \
     python3-pip \
     wget \
     unzip \
+    # mysqldump command
+    mariadb-client-10.5 \    
   && rm -rf /var/lib/apt/lists/*
 
 RUN docker-php-ext-install \
@@ -38,7 +41,8 @@ COPY install-composer.sh /root/install-composer.sh
 RUN sh /root/install-composer.sh
 
 # fabric & final ssh setup
-RUN pip install fabric --break-system-packages \
+RUN pip install fabric \ 
+    # --break-system-packages \
     # Prepare SSH handling
     && mkdir /root/.ssh \
     && chmod 0600 /root/.ssh \
