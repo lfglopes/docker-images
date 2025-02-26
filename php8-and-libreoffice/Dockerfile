@@ -1,9 +1,9 @@
-FROM php:8.1.25-cli
+FROM php:8.2-cli
 LABEL Author="Luis Lopes <git@luislopes.org>" \
-  Description="Container with PHP 8.1, fabric and NPM"
+  Description="Container with PHP 8.2, fabric and NPM"
 
 # install all packages in a go
-RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash \
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash \
   && apt-get update \
   && apt-get install -y \
   libfreetype6-dev \

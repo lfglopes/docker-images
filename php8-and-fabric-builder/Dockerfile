@@ -21,7 +21,7 @@ RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash \
     wget \
     unzip \
     # mysqldump command
-    mariadb-client-10.5 \    
+    mariadb-client \    
   && rm -rf /var/lib/apt/lists/*
 
 RUN docker-php-ext-install \
@@ -41,8 +41,7 @@ COPY install-composer.sh /root/install-composer.sh
 RUN sh /root/install-composer.sh
 
 # fabric & final ssh setup
-RUN pip install fabric \ 
-    # --break-system-packages \
+RUN pip install fabric --break-system-packages \
     # Prepare SSH handling
     && mkdir /root/.ssh \
     && chmod 0600 /root/.ssh \
