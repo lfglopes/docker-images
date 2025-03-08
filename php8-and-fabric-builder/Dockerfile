@@ -24,7 +24,8 @@ RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash \
     mariadb-client \    
   && rm -rf /var/lib/apt/lists/*
 
-RUN docker-php-ext-install \
+RUN docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ \
+  && docker-php-ext-install \
   bcmath \
   gd \
   zip \
