@@ -3,6 +3,8 @@ FROM php:${PHP_VERSION}-cli
 LABEL Author="Luis Lopes <git@luislopes.org>" \
       Description="Container with PHP 8.1, fabric and NPM"
 
+ENV PIP_BREAK_SYSTEM_PACKAGES=1
+
 # install all packages in a go
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash \
   && apt-get install -y \
@@ -30,6 +32,7 @@ RUN docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/i
   gd \
   zip \
   pdo_mysql \
+  exif \
   mysqli \
   fileinfo \
   xsl \
@@ -42,7 +45,7 @@ COPY install-composer.sh /root/install-composer.sh
 RUN sh /root/install-composer.sh
 
 # fabric & final ssh setup
-RUN pip install fabric --break-system-packages \
+RUN pip install fabric \
     # Prepare SSH handling
     && mkdir /root/.ssh \
     && chmod 0600 /root/.ssh \
