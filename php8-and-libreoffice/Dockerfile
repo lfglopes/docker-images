@@ -11,6 +11,7 @@ RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash \
   iproute2 \
   libzip-dev \
   libxslt1-dev \
+  libicu-dev \
   build-essential \
   nodejs \
   python3-pip \
@@ -18,6 +19,8 @@ RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash \
   pipx \
   wget \
   unzip \
+  # mysqldump command
+  mariadb-client \
   && rm -rf /var/lib/apt/lists/*
 
 RUN docker-php-ext-install \
